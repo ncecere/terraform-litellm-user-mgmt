@@ -1,0 +1,71 @@
+version: "> 0.14.0"
+
+formatter: markdown
+
+header-from: docs/HEADER.md
+footer-from: ""
+
+content: |-
+  {{ .Header }}
+
+  ## Examples
+
+  **Simple**
+
+  ```bash
+  {{ include "examples/minimal/main.tf" }}
+  ```
+
+  ---
+
+  {{ .Inputs }}
+
+  {{ .Modules }}
+
+  {{ .Outputs }}
+
+  {{ .Providers }}
+
+  Below is an example of how to configure the provider.
+
+  ```bash
+  {{ include "examples/minimal/provider.tf" }}
+  ```
+
+  {{ .Requirements }}
+
+  Below is an example of how to configure the requirements.
+
+  ```bash
+  {{ include "examples/minimal/version.tf" }}
+  ```
+
+  {{ .Resources }}
+
+output:
+  file: "./README.md"
+  mode: replace
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+
+output-values:
+  enabled: false
+  from: ""
+
+sort:
+  enabled: true
+  by: name
+
+settings:
+  anchor: true
+  color: true
+  default: true
+  description: false
+  escape: true
+  html: true
+  indent: 2
+  required: true
+  sensitive: true
+  type: true
